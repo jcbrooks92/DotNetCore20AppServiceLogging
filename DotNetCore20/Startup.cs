@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetCore20
 {
@@ -16,6 +17,9 @@ namespace DotNetCore20
             Configuration = configuration;
         }
 
+     
+
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,7 +29,7 @@ namespace DotNetCore20
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -36,6 +40,9 @@ namespace DotNetCore20
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            loggerFactory.AddDebug();
+            loggerFactory.AddAzureWebAppDiagnostics();
 
             app.UseStaticFiles();
 
