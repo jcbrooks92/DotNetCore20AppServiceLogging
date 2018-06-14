@@ -23,7 +23,7 @@ namespace DotNetCore20.Pages
 
         public void OnGet()
         {
-            _logger.LogInformation("Hello");
+            _logger.LogInformation("Hello from the about page");
             Message = "Your application description page.";
             
 

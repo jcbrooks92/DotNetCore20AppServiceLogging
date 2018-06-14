@@ -29,7 +29,7 @@ namespace DotNetCore20
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -41,8 +41,8 @@ namespace DotNetCore20
                 app.UseExceptionHandler("/Error");
             }
 
-            loggerFactory.AddDebug();
-            loggerFactory.AddAzureWebAppDiagnostics();
+            //loggerFactory.AddDebug();
+            //loggerFactory.AddAzureWebAppDiagnostics();
 
             app.UseStaticFiles();
 
