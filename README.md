@@ -1,44 +1,8 @@
 Welcome to the DotNetCore2.0 Logging with AppServices.
 
-Since there isn't a full project example that I could I find I decided to create one. This should just be used as a reference to get started. Thanks to the StackOverflow user Lars for his reference : [Stackoverflowpost](https://stackoverflow.com/questions/49111671/where-does-the-asp-net-core-logging-api-as-default-store-logs)
+In looking into this further you do not have to do anything special with .Net Core 2.0 for logging to show up within the application logs for Azure Web Apps. I removed all the code mentioned below in the startup.cs and the functionality worked. See this link for more detail: [Azure App Service provider](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?tabs=aspnetcore2x&view=aspnetcore-2.1#azure-app-service-provider)
 
-![LogStream view from App Service](https://github.com/jcbrooks92/DotNetCore20AppServiceLogging/blob/master/TestCore20.png)
-Startup.cs should look similar to this, note the important parts are surrounded by ** **:
-```
-     public void Configure(IApplicationBuilder app, IHostingEnvironment env, **ILoggerFactory loggerFactory**)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
-
-            loggerFactory.AddDebug();
-            **loggerFactory.AddAzureWebAppDiagnostics();**
-
-            app.UseStaticFiles();
-
-            app.UseMvc();
-        }
-```
-
-The appsettings.json should reflect the log level you are wanting to use:
-```
-{
-  "Logging": {
-    "IncludeScopes": false,
-    "LogLevel": {
-      "Default": "Information"
-    }
-  }
-}
-```
-
-Finally your .cs file (I used the about.cshtml) should look similar to this:
+In your .cs file (I used the about.cshtml) should look similar to this:
 ```
  private ILogger _logger;
 
